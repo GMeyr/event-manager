@@ -1,9 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-</head>
-<body>
 
+  <link rel="stylesheet" type="text/css" href="./css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+
+  <title>Event Manager</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+</head>
+<body ng-app="EventManager" ng-controller="mainCtrl">
+  <table>
+    <tbody>
+      <tr>
+        <th>Event Name</th>
+        <th>Date</th>
+        <th>Venue</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>Benny and the Jets</td>
+        <td>Feb 2 7pm</td>
+        <td>Royal Theater</td>
+        <td>New York</td>
+        <td>NY</td>
+        <td>remove/edit</td>
+      </tr>
+    </tbody>
+  </table>
+  <script type="text/javascript" src="./js/scripts.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
 </html>

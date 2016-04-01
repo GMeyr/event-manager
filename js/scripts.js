@@ -1,3 +1,11 @@
+angular.module('EventManager', [])
+
+  .controller('mainCtrl', ['$scope', function($scope){
+
+  }])
+
+  .factory();
+
 /* API Usage examples
 
 var exampleEvent = {
