@@ -13,6 +13,8 @@ angular.module('EventManager', [])
       $scope.$apply();
     }, function(){
       console.log('failed to retrieve events');
+      $scope.serverFailure = true;
+      $scope.$apply();
     });
     
 
