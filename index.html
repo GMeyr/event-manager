@@ -33,7 +33,7 @@
               <td>{{ event.venue.name }}</td>
               <td>{{ event.venue.city }}</td>
               <td>{{ event.venue.state }}</td>
-              <td><a href="#!" ng-click="removeEvent(event.id)">Remove</a>/  <a ng-click="openEditor(event)">Edit</a></td>
+              <td><a ng-click="eventToRemove(event.id)" class="modal-trigger" href="#modal1">Remove</a>/  <a ng-click="openEditor(event)">Edit</a></td>
             </tr>
             </tbody>
         </table>
@@ -112,6 +112,19 @@
 
     </div>
   </div>
+
+  <!-- Alert for removing events -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Remove Event?</h4>
+      <p>Are you sure you want to remove this event?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="removeEvent(event.id)">Yes</a>
+    </div>
+  </div>
+          
 
 
   <script type="text/javascript" src="./js/vividSeats.js"></script>

@@ -92,13 +92,10 @@ angular.module('EventManager', [])
           state : angular.element('#stateInput').val()
         }
       };
-      console.log('trying to update', updatedEvent.id);
-      
 
       VividSeats.eventService.update( updatedEvent,
         function(){
           console.log('update success');
-          //refresh DOM
           $scope.showEditor = false;
           VividSeats.eventService.all(
             function(arr){
@@ -117,8 +114,13 @@ angular.module('EventManager', [])
         });
     };
 
-  $scope.removeEvent = function(id){
-    VividSeats.eventService.remove( {id: id}, function(){
+  $scope.eventToRemove = function(id){
+    $scope.eventIdToRemove = id;
+  }
+
+  $scope.removeEvent = function(){
+
+    VividSeats.eventService.remove( {id: $scope.eventIdToRemove}, function(){
       console.log('remove successful')
       VividSeats.eventService.all(
             function(arr){
@@ -174,5 +176,17 @@ angular.module('EventManager', [])
     $scope.cities = citiesArr;
     $scope.$apply();
   }
-}]);
+
+  $scope.initModals = function() {
+    $('.modal-trigger').leanModal(); // Initialize the modals
+  }
+}])
+
+.directive('repeatDone', function() {
+    return function(scope, element, attrs) {
+        if (scope.$last) {
+            scope.$eval(attrs.repeatDone);
+        }
+    }
+});
 
