@@ -13,8 +13,11 @@ angular.module('EventManager', [])
     
 
     $scope.focusOnEvent = function(event){
-      console.log('focused event', $scope.focus);
-      $scope.focus = event;
+      angular.element('#nameInput').val(event.name);
+      angular.element('#dateInput').val(event.date);
+      angular.element('#venueInput').val(event.venue.name);
+      angular.element('#cityInput').val(event.venue.city);
+      angular.element('#stateInput').val(event.venue.state);
       $scope.showEditor = true;
     };
     $scope.cancelEditor = function(event){
@@ -42,6 +45,7 @@ angular.module('EventManager', [])
             function(arr){
               $scope.eventArr = arr;
               $scope.$apply();
+              $scope.focus = {};
               $scope.showEditor = false;
             }, function(){
               console.log('failed to retrieve events');
@@ -63,6 +67,7 @@ angular.module('EventManager', [])
               $scope.showEditor = false;
             }, function(){
               console.log('failed to retrieve events');
+              Materialize.toast('Network error! Try removing again.', 2000);
             });
     }, function(){
       console.log('remove failed');

@@ -48,22 +48,22 @@
             <div class="row">
               <div>
                 <p><strong>What</strong></p>
-                <input value="{{ focus.name }}" placeholder="Event Name" id="nameInput" type="text">
+                <input placeholder="Event Name" id="nameInput" type="text">
               </div>
               <div>
-                <input value="{{ focus.date }}" placeholder="Date" id="dateInput" type="text">
+                <input placeholder="Date" id="dateInput" type="text">
               </div>
             </div>
             <div class="row">
               <div>
                 <p><strong>Where</strong></p>
-                <input value="{{ focus.venue.name }}" placeholder="Venue" id="venueInput" type="text">
+                <input placeholder="Venue" id="venueInput" type="text">
               </div>
               <div class="col s8">
-                <input value="{{ focus.venue.city }}" placeholder="City" id="cityInput" type="text">
+                <input placeholder="City" id="cityInput" type="text">
               </div>
                 <div class="col s4">
-              <input value="{{ focus.venue.state }}" placeholder="State" id="stateInput" type="text">
+              <input placeholder="State" id="stateInput" type="text">
             </div>
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancelEditor()">Cancel</a>
               <a href="#!" class="modal-action modal-close waves-effect waves-green btn" ng-click="updateEvent()">Save</a>
