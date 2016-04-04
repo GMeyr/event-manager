@@ -12,28 +12,54 @@
 
 </head>
 <body ng-app="EventManager" ng-controller="mainCtrl">
-  <table>
-    <tbody>
-      <tr>
-        <th>Event Name</th>
-        <th>Date</th>
-        <th>Venue</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Action</th>
-      </tr>
-      <tr>
-        <td>Benny and the Jets</td>
-        <td>Feb 2 7pm</td>
-        <td>Royal Theater</td>
-        <td>New York</td>
-        <td>NY</td>
-        <td>remove/edit</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <table class="bordered">
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Date</th>
+              <th>Venue</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+            <tbody ng-repeat="event in stuff" repeat-done="initModals()">
+            <tr>
+              <td>{{ event.name }}</td>
+              <td>{{ event.date }}</td>
+              <td>{{ event.venue.name }}</td>
+              <td>{{ event.venue.city }}</td>
+              <td>{{ event.venue.state }}</td>
+              <td>remove/  <a ng-click class="modal-trigger" href="#editor" >Modal</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Editor Modal -->
+  <div id="editor" class="modal">
+    <div class="modal-content">
+      <h4>Edit Event</h4>
+      <input placeholder="{{ focus.name }}" id="nameInput" type="text">
+      <label for"nameInput">Event Name</label>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
   <script type="text/javascript" src="./js/scripts.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+
+
 </body>
 </html>
