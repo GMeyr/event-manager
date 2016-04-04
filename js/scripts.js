@@ -9,6 +9,7 @@ angular.module('EventManager', [])
     function(arr){
       console.log('arr', arr);
       $scope.eventArr = arr;
+      separateIntoCities(arr);
       $scope.$apply();
     }, function(){
       console.log('failed to retrieve events');
@@ -132,24 +133,28 @@ angular.module('EventManager', [])
     })
   }
 
-  function deepCopy (obj) {
-    if (Object.prototype.toString.call(obj) === '[object Array]') {
-        var out = [], i = 0, len = obj.length;
-        for ( ; i < len; i++ ) {
-            out[i] = arguments.callee(obj[i]);
-        }
-        return out;
+  function separateIntoCities (arr) {
+    console.log('separateIntoCities');
+    var citiesObj = {};
+    var citiesArr = [];
+
+    arr.forEach(function(event){
+      if( !citiesObj[event.venue.city] ){
+        citiesObj[event.venue.city] = 1;
+      } else {
+        citiesObj[event.venue.city]++;
+      }
+    });
+
+    for( var key in citiesObj){
+      citiesArr.push([key, citiesObj[key]]);
     }
-    if (typeof obj === 'object') {
-        var out = {}, i;
-        for ( i in obj ) {
-            out[i] = arguments.callee(obj[i]);
-        }
-        return out;
-    }
-    return obj;
-    }
-  }]);
+
+    $scope.cities = citiesArr;
+    $scope.$apply();
+    console.log('$scope.cities', citiesArr);
+  }
+}]);
 
 /* API Usage examples
 

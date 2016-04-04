@@ -11,3 +11,7 @@
   padding-bottom: 15px;
   margin-left: 15px;
 }
+
+li a {
+  color: black;
+}

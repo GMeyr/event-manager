@@ -44,6 +44,15 @@
           <h3>Event Manager</h3>
           <a href="#!" class="waves-effect waves-green btn" ng-click="openCreator()">Add Event</a>
         </div>
+
+        <div id="citySelector">
+          <ul>
+            <li ng-repeat="city in cities">
+              <a href="#!" ng-click="onlyCity($index)"> {{ city[0] }} ({{ city[1] }})</a>
+            </li>
+          </ul>
+        </div>
+
         <div id="editor" class="brown lighten-3" ng-cloak ng-show="showEditor">
           <h5>Edit Event</h5>
             <div class="row">
