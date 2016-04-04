@@ -26,9 +26,9 @@
               <th>Action</th>
             </tr>
           </thead>
-            <tbody ng-repeat="event in stuff" repeat-done="initModals()">
+            <tbody ng-repeat="event in eventArr" repeat-done="initModals()">
             <tr>
-              <td>{{ event.name }}</td>
+              <td class="">{{ event.name }}</td>
               <td>{{ event.date }}</td>
               <td>{{ event.venue.name }}</td>
               <td>{{ event.venue.city }}</td>
@@ -68,8 +68,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="updateEvent()">Save</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="backupCloseModal()">Cancel</a>
+      <a href="#!" class=" modal-action waves-effect waves-green btn-flat" ng-click="updateEvent()">Save</a>
     </div>
   </div>
 
