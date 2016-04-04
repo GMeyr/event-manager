@@ -1,0 +1,8 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+#editor {
+  padding: 15px;
+  margin-bottom: 15px;
+}

@@ -11,21 +11,15 @@ angular.module('EventManager', [])
       console.log('failed to retrieve events');
     });
     
-    $scope.initModals = function() {
-      $('.modal-trigger').leanModal();
-    };
 
     $scope.focusOnEvent = function(event){
+      console.log('focused event', $scope.focus);
       $scope.focus = event;
+      $scope.showEditor = true;
     };
-
-    $scope.backupCloseModal = function(){
-      $timeout(function(){
-        angular.element('#editor').closeModal();
-        angular.element('.lean-overlay').remove();
-      }, 100);
-
-    }
+    $scope.cancelEditor = function(event){
+      $scope.showEditor = false;
+    };
 
     $scope.updateEvent = function(){
       
@@ -43,21 +37,27 @@ angular.module('EventManager', [])
         function(){
           console.log('update success');
           //refresh DOM
+          $scope.showEditor = false;
           VividSeats.eventService.all(
             function(arr){
               $scope.eventArr = arr;
               $scope.$apply();
-              $scope.backupCloseModal();
+              $scope.showEditor = false;
             }, function(){
               console.log('failed to retrieve events');
+              Materialize.toast('Update failed! Try saving again.', 4000);
             });
         }, function(){
           console.log('update failed');
+          Materialize.toast('Update failed! Try saving again.', 4000);
         });
     };
 
+  $scope.removeEvent = function(){
 
-  var deepCopy = function (obj) {
+  }
+
+  function deepCopy (obj) {
     if (Object.prototype.toString.call(obj) === '[object Array]') {
         var out = [], i = 0, len = obj.length;
         for ( ; i < len; i++ ) {
@@ -73,26 +73,8 @@ angular.module('EventManager', [])
         return out;
     }
     return obj;
-    };
-  }])
-
-
-  // $scope.updateEvent = VividSeats.eventService.update( focus,
-  //   function(){
-  //     console.log('update success');
-  //   }, function(){
-  //     console.log('update failed');
-  //   });
-  // }])
-
-  // this custom directive is not my code, it's a tip from StackOverflow
-  .directive('repeatDone', function() {
-    return function(scope, element, attrs) {
-        if (scope.$last) {
-            scope.$eval(attrs.repeatDone);
-        }
     }
-});
+  }]);
 
 /* API Usage examples
 
