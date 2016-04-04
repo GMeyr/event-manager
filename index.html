@@ -48,7 +48,7 @@
         <div id="citySelector">
           <ul>
             <li ng-repeat="city in cities">
-              <a href="#!" ng-click="onlyCity($index)"> {{ city[0] }} ({{ city[1] }})</a>
+              <a href="#!" ng-click="onlyCity(city[0])"> {{ city[0] }} ({{ city[1] }})</a>
             </li>
           </ul>
         </div>

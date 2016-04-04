@@ -63,6 +63,7 @@ angular.module('EventManager', [])
               $scope.$apply();
               $scope.showEditor = false;
               $scope.showCreator = false;
+              separateIntoCities(arr);
             }, function(){
               console.log('failed to add event');
               Materialize.toast('Network error! Try adding again.', 2000);
@@ -105,6 +106,7 @@ angular.module('EventManager', [])
               $scope.$apply();
               $scope.focus = {};
               $scope.showEditor = false;
+              separateIntoCities(arr);
             }, function(){
               console.log('failed to retrieve events');
               Materialize.toast('Network error! Try saving again.', 2000);
@@ -123,6 +125,7 @@ angular.module('EventManager', [])
               $scope.eventArr = arr;
               $scope.$apply();
               $scope.showEditor = false;
+              separateIntoCities(arr);
             }, function(){
               console.log('failed to retrieve events');
               Materialize.toast('Network error! Try removing again.', 2000);
@@ -133,10 +136,29 @@ angular.module('EventManager', [])
     })
   }
 
+  $scope.onlyCity = function(city){
+      VividSeats.eventService.all(
+        function(arr){
+          if( city === 'All' ){
+            $scope.eventArr = arr;
+            
+          } else {
+            $scope.eventArr = arr.filter(function(event){
+              return event.venue.city === city;
+            });
+          }
+          $scope.$apply();
+        }, function(){
+          console.log('failed to retrieve events');
+          Materialize.toast('Network error! Try clicking again.', 2000);
+    });
+    
+  };
+
   function separateIntoCities (arr) {
     console.log('separateIntoCities');
     var citiesObj = {};
-    var citiesArr = [];
+    var citiesArr = [['All', arr.length]];
 
     arr.forEach(function(event){
       if( !citiesObj[event.venue.city] ){
