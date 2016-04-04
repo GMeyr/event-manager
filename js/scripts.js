@@ -6,6 +6,10 @@ angular.module('EventManager', [])
     $('.modal-trigger').leanModal();
   }
 
+  $scope.focusOnEvent = function(event){
+    $scope.focus = event;
+  }
+
 
     var VividSeats = (function(){
       //private collection and accessors
@@ -184,7 +188,7 @@ angular.module('EventManager', [])
                       });
   }])
 
-  // this custom directive is not my code -- a tip I found on StackOverflow
+  // this custom directive is not my code, it's a tip from StackOverflow
   .directive('repeatDone', function() {
     return function(scope, element, attrs) {
         if (scope.$last) {

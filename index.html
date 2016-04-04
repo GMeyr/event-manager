@@ -33,7 +33,7 @@
               <td>{{ event.venue.name }}</td>
               <td>{{ event.venue.city }}</td>
               <td>{{ event.venue.state }}</td>
-              <td>remove/  <a ng-click class="modal-trigger" href="#editor" >Modal</a></td>
+              <td>remove/  <a ng-click="focusOnEvent(event)" class="modal-trigger" href="#editor" >Modal</a></td>
             </tr>
             </tbody>
         </table>
@@ -47,8 +47,25 @@
   <div id="editor" class="modal">
     <div class="modal-content">
       <h4>Edit Event</h4>
-      <input placeholder="{{ focus.name }}" id="nameInput" type="text">
-      <label for"nameInput">Event Name</label>
+        <div class="row">
+          <div class="col s8">
+            <input value="{{ focus.name }}" placeholder="Event Name" id="nameInput" type="text">
+          </div>
+          <div class="col s4">
+            <input value="{{ focus.date }}" placeholder="Date" id="dateInput" type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s8">
+            <input value="{{ focus.venue.name }}" placeholder="Venue" id="venueInput" type="text">
+          </div>
+          <div class="col s3">
+            <input value="{{ focus.venue.city }}" placeholder="City" id="cityInput" type="text">
+          </div>
+            <div class="col s1">
+          <input value="{{ focus.venue.state }}" placeholder="State" id="stateInput" type="text">
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
