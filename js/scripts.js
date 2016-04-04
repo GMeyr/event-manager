@@ -45,16 +45,29 @@ angular.module('EventManager', [])
               $scope.showEditor = false;
             }, function(){
               console.log('failed to retrieve events');
-              Materialize.toast('Update failed! Try saving again.', 4000);
+              Materialize.toast('Network error! Try saving again.', 2000);
             });
         }, function(){
           console.log('update failed');
-          Materialize.toast('Update failed! Try saving again.', 4000);
+          Materialize.toast('Network error! Try saving again.', 2000);
         });
     };
 
-  $scope.removeEvent = function(){
-
+  $scope.removeEvent = function(id){
+    VividSeats.eventService.remove( {id: id}, function(){
+      console.log('remove successful')
+      VividSeats.eventService.all(
+            function(arr){
+              $scope.eventArr = arr;
+              $scope.$apply();
+              $scope.showEditor = false;
+            }, function(){
+              console.log('failed to retrieve events');
+            });
+    }, function(){
+      console.log('remove failed');
+      Materialize.toast('Network error! Try removing again.', 2000);
+    })
   }
 
   function deepCopy (obj) {
