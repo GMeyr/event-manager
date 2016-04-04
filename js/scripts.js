@@ -2,6 +2,9 @@ angular.module('EventManager', [])
 
   .controller('mainCtrl', ['$scope', '$timeout', function($scope, $timeout){
 
+  var eventIdCount = 132;
+  var venueIdCount = 3244;
+
   VividSeats.eventService.all(
     function(arr){
       console.log('arr', arr);
@@ -12,7 +15,9 @@ angular.module('EventManager', [])
     });
     
 
-    $scope.focusOnEvent = function(event){
+    $scope.openEditor = function(event){
+      $scope.editedEvent = event;
+      $scope.showCreator = false;
       angular.element('#nameInput').val(event.name);
       angular.element('#dateInput').val(event.date);
       angular.element('#venueInput').val(event.venue.name);
@@ -20,23 +25,75 @@ angular.module('EventManager', [])
       angular.element('#stateInput').val(event.venue.state);
       $scope.showEditor = true;
     };
-    $scope.cancelEditor = function(event){
-      $scope.showEditor = false;
+
+    $scope.cancel = function(Form){
+      $scope['show' + Form] = false;
     };
 
-    $scope.updateEvent = function(){
+    $scope.openCreator = function(){
+      angular.element('#newNameInput').val("");
+      angular.element('#newDateInput').val("");
+      angular.element('#newVenueInput').val("");
+      angular.element('#newCityInput').val("");
+      angular.element('#newStateInput').val("");
+      $scope.showEditor = false;
+      $scope.showCreator = true;
+    }
+
+    $scope.createEvent = function() {
+      var newEvent = {
+        id : eventIdCount++,
+        name : angular.element('#newNameInput').val(),
+        date : angular.element('#newDateInput').val(),
+        venue : {
+          id: venueIdCount++,
+          name : angular.element('#newVenueInput').val(),
+          city : angular.element('#newCityInput').val(),
+          state : angular.element('#newStateInput').val()
+        }
+      };
+
+      VividSeats.eventService.add( newEvent, function(){
+          console.log('add success');
+          $scope.showCreator = false;
+          VividSeats.eventService.all(
+            function(arr){
+              $scope.eventArr = arr;
+              $scope.$apply();
+              $scope.showEditor = false;
+              $scope.showCreator = false;
+            }, function(){
+              console.log('failed to add event');
+              Materialize.toast('Network error! Try adding again.', 2000);
+            });
+        }, function(){
+          console.log('add failed');
+        });
+      };
+
+    $scope.updateEvent = function(event){
       
-      var newEvent = deepCopy($scope.focus);
-        
-      newEvent.name = angular.element('#nameInput').val();
-      newEvent.date = angular.element('#dateInput').val();
-      newEvent.venue.name = angular.element('#venueInput').val();
-      newEvent.venue.city = angular.element('#cityInput').val();
-      newEvent.venue.state = angular.element('#stateInput').val();
-      console.log('trying to update', newEvent.id);
+      var updatedEvent = {
+        id: $scope.editedEvent.id,
+        name : angular.element('#nameInput').val(),
+        date : angular.element('#dateInput').val(),
+        venue : {
+          id: (function(){
+            if( $scope.editedEvent.venue.name === angular.element('#venueInput').val() ){
+              return $scope.editedEvent.venue.id;
+            } else {
+              return venueIdCount++;
+            }
+          })(),
+          name : angular.element('#venueInput').val(),
+          city : angular.element('#cityInput').val(),
+          state : angular.element('#stateInput').val()
+        }
+      };
+      console.log('trying to update', updatedEvent.id);
       
 
-      VividSeats.eventService.update( newEvent,
+      VividSeats.eventService.update( updatedEvent,
         function(){
           console.log('update success');
           //refresh DOM

@@ -33,7 +33,7 @@
               <td>{{ event.venue.name }}</td>
               <td>{{ event.venue.city }}</td>
               <td>{{ event.venue.state }}</td>
-              <td><a href="#!" ng-click="removeEvent(event.id)">Remove</a>/  <a ng-click="focusOnEvent(event)">Edit</a></td>
+              <td><a href="#!" ng-click="removeEvent(event.id)">Remove</a>/  <a ng-click="openEditor(event)">Edit</a></td>
             </tr>
             </tbody>
         </table>
@@ -42,6 +42,7 @@
       <div class="col s3 sidebar brown lighten-1">
         <div class="sidebar-header">
           <h3>Event Manager</h3>
+          <a href="#!" class="waves-effect waves-green btn" ng-click="openCreator()">Add Event</a>
         </div>
         <div id="editor" class="brown lighten-3" ng-cloak ng-show="showEditor">
           <h5>Edit Event</h5>
@@ -65,12 +66,39 @@
                 <div class="col s4">
               <input placeholder="State" id="stateInput" type="text">
             </div>
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="cancelEditor()">Cancel</a>
-              <a href="#!" class="modal-action modal-close waves-effect waves-green btn" ng-click="updateEvent()">Save</a>
+              <a href="#!" class="waves-effect waves-green btn-flat" ng-click="cancel('Editor')">Cancel</a>
+              <a href="#!" class="waves-effect waves-green btn" ng-click="updateEvent()">Save</a>
             </div>
           </div>
-          </div>
+            <div id="creator" class="brown lighten-3" ng-cloak ng-show="showCreator">
+              <h5>Create Event</h5>
+                <div class="row">
+                  <div>
+                    <p><strong>What</strong></p>
+                    <input placeholder="Event Name" id="newNameInput" type="text">
+                  </div>
+                  <div>
+                    <input placeholder="Date" id="newDateInput" type="text">
+                  </div>
+                </div>
+                <div class="row">
+                  <div>
+                    <p><strong>Where</strong></p>
+                    <input placeholder="Venue" id="newVenueInput" type="text">
+                  </div>
+                  <div class="col s8">
+                    <input placeholder="City" id="newCityInput" type="text">
+                  </div>
+                    <div class="col s4">
+                  <input placeholder="State" id="newStateInput" type="text">
+                </div>
+                  <a href="#!" class="waves-effect waves-green btn-flat" ng-click="cancel('Creator')">Cancel</a>
+                  <a href="#!" class="waves-effect waves-green btn" ng-click="createEvent()">Save</a>
+                </div>
+              </div>
+          
         </div>
+      </div>
 
     </div>
   </div>

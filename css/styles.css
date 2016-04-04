@@ -2,7 +2,12 @@
   display: none !important;
 }
 
-#editor {
+#editor, #creator {
   padding: 15px;
   margin-bottom: 15px;
+}
+
+.sidebar-header {
+  padding-bottom: 15px;
+  margin-left: 15px;
 }
